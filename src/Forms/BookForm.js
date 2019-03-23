@@ -1,41 +1,66 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input, FormFeedback, FormText } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap';
 import './BookForm.css';
 
 export default class BookForm extends React.Component {
   render() {
     return (
       <Form className="container">
+      <h2>Fill Book Information</h2>
         <FormGroup >
-          <Label>Book Name</Label>
-          <Input />
+          <Label for="bookName">Book Name</Label>
+          <Input placeholder="Book Name"/>
           <FormFeedback valid>Sweet! that name is available</FormFeedback>
           <FormText>Example help text that remains unchanged.</FormText>
         </FormGroup>
         <FormGroup>
-          <Label for="examplePassword">Invalid input</Label>
-          <Input />
+          <Label for="authorName">Author Name</Label>
+          <Input type="select" name="authorName" id="authorName">
+          <option>Select</option>
+            <option>Author1</option>
+            <option>Author2</option>
+            <option>Author3</option>
+            <option>Author4</option>
+            <option>Author5</option>
+          </Input>
           <FormFeedback>Oh noes! that name is already taken</FormFeedback>
           <FormText>Example help text that remains unchanged.</FormText>
         </FormGroup>
         <FormGroup>
-          <Label for="exampleEmail">Input without validation</Label>
-          <Input />
+          <Label for="datePublished">Date Published</Label>
+          <Input type="date"
+            name="datePublished"
+            id="datePublished"
+            placeholder="Date Published"/>
           <FormFeedback tooltip>You will not be able to see this</FormFeedback>
           <FormText>Example help text that remains unchanged.</FormText>
         </FormGroup>
-        <FormGroup>
-          <Label for="exampleEmail">Valid input</Label>
-          <Input valid />
-          <FormFeedback valid tooltip>Sweet! that name is available</FormFeedback>
+        <FormGroup >
+          <Label for="Publication">Publication</Label>
+          <Input placeholder="Publication"/>
+          <FormFeedback valid>Sweet! that name is available</FormFeedback>
           <FormText>Example help text that remains unchanged.</FormText>
         </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword">Invalid input</Label>
-          <Input invalid />
-          <FormFeedback tooltip>Oh noes! that name is already taken</FormFeedback>
+        <FormGroup >
+          <Label for="Publisher">Publisher</Label>
+          <Input placeholder="Publisher"/>
+          <FormFeedback valid>Sweet! that name is available</FormFeedback>
           <FormText>Example help text that remains unchanged.</FormText>
         </FormGroup>
+        <FormGroup >
+          <Label for="About">About</Label>
+          <Input placeholder="About"/>
+          <FormFeedback valid>Sweet! that name is available</FormFeedback>
+          <FormText>Example help text that remains unchanged.</FormText>
+        </FormGroup>
+        <FormGroup >
+          <Label for="Genre">Genre</Label>
+          <Input placeholder="Genre"/>
+          <FormFeedback valid>Sweet! that name is available</FormFeedback>
+          <FormText>Example help text that remains unchanged.</FormText>
+        </FormGroup>
+        <Button color="primary">Save</Button> {' '}
+          <Button color="info">Clear</Button>
       </Form>
     );
   }

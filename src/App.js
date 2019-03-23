@@ -12,6 +12,8 @@ import Authors from './components/Authors';
 import Landing from './components/Landing';
 import * as routes from './constants/routes';
 import BookForm from './Forms/BookForm';
+import AuthorForm from './Forms/AuthorForm';
+import InventoryForm from './Forms/InventoryForm';
 
 class App extends Component {
   render() {
@@ -27,6 +29,8 @@ class App extends Component {
         <Route exact path={routes.INVENTORY} component={Inventory} />
         <Route exact path={routes.AUTHORS} component={Authors} />
         <Route exact path={routes.ADD_BOOK} component={BookForm} />
+        <Route exact path={routes.ADD_AUTHOR} component={AuthorForm} />
+        <Route exact path={routes.ADD_INVENTORY} component={InventoryForm} />
       </Switch>
       <footer className="container-fluid footer text-center">
         <p>Developed By  <a href="http://www.Xcdify.com/">www.Xcdify.com</a></p> 

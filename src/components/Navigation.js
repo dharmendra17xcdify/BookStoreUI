@@ -21,7 +21,10 @@ const Navigation = () => {
                 <NavLink href="/about">About</NavLink>
             </NavItem>
             <NavItem>
-            <Button color="primary" href="/addbook">Add a Book</Button>
+            <Button color="primary" href="/addbook">Add a Book</Button> 
+            </NavItem>
+            <NavItem>
+            <Button color="primary" href="/addauthor">Add an Author</Button>
             </NavItem>
         </Nav>
     </Navbar>
