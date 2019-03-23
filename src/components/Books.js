@@ -103,8 +103,9 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
              return <Card key={'book-' + i}>
               <CardImg className="book-image" src={res.image} alt="Card image cap" />
               <CardBody>
-                <CardTitle>{res.name}</CardTitle>
-                <CardSubtitle>{res.genre}</CardSubtitle>
+                <CardTitle><strong>Title : </strong>  {res.name}</CardTitle>
+                <CardSubtitle><strong>Author : </strong> {res.authorName}</CardSubtitle>
+                <CardSubtitle><strong>Genre : </strong> {res.genre}</CardSubtitle>
                 {/* <CardText>{res.about}</CardText> */}
                 <Button color="primary" href="/addbook">Edit</Button> {' '}
                 <Button color="danger">Delete</Button>

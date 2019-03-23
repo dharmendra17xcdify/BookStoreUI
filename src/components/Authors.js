@@ -12,6 +12,8 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
     AuthorName: 'Arundhati Roy',
     image: ArundhatiRoy,
     genre: 'Novel',
+    Books: 'The God of Small Things',
+    Awards : 'Man Booker Prize (1997), Sydney Peace Prize (2004)',
     AboutAuther: 'Suzanna Arundhati Roy (born 24 November 1961)[1] is an Indian author best known for her novel The God of Small Things (1997), which won the Man Booker Prize for Fiction in 1997 and became the biggest-selling book by a non-expatriate Indian author. She is also a political activist involved in human rights and environmental causes.'
   },
   {
@@ -19,6 +21,8 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
     AuthorName: 'Chetan Bhagat',
     image: Chetan_Bhagat,
     genre: 'Novel',
+    Books: 'The God of Small Things',
+    Awards : 'Man Booker Prize (1997), Sydney Peace Prize (2004)',
     AboutAuther: 'Suzanna Arundhati Roy (born 24 November 1961)[1] is an Indian author best known for her novel The God of Small Things (1997), which won the Man Booker Prize for Fiction in 1997 and became the biggest-selling book by a non-expatriate Indian author. She is also a political activist involved in human rights and environmental causes.'
   },
   {
@@ -26,6 +30,8 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
     AuthorName: 'Ravindranath Tagore',
     image: Tagore,
     genre: 'Novel',
+    Books: 'The God of Small Things',
+    Awards : 'Man Booker Prize (1997), Sydney Peace Prize (2004)',
     AboutAuther: 'Suzanna Arundhati Roy (born 24 November 1961)[1] is an Indian author best known for her novel The God of Small Things (1997), which won the Man Booker Prize for Fiction in 1997 and became the biggest-selling book by a non-expatriate Indian author. She is also a political activist involved in human rights and environmental causes.'
   },
   {
@@ -33,6 +39,8 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
     AuthorName: 'Arundhati Roy',
     image: ArundhatiRoy,
     genre: 'Novel',
+    Books: 'The God of Small Things',
+    Awards : 'Man Booker Prize (1997), Sydney Peace Prize (2004)',
     AboutAuther: 'Suzanna Arundhati Roy (born 24 November 1961)[1] is an Indian author best known for her novel The God of Small Things (1997), which won the Man Booker Prize for Fiction in 1997 and became the biggest-selling book by a non-expatriate Indian author. She is also a political activist involved in human rights and environmental causes.'
   }
 ];
@@ -66,8 +74,10 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
           return <Card key={'book-' + i}>
             <CardImg src={res.image} alt="Card image cap" />
             <CardBody>
-              <CardTitle>{res.AuthorName}</CardTitle>
-              <CardSubtitle>{res.genre}</CardSubtitle>
+              <CardTitle><strong>Name : </strong>{res.AuthorName}</CardTitle>
+              <CardSubtitle><strong>Awards : </strong> {res.Awards}</CardSubtitle>
+              <CardSubtitle><strong>Books : </strong> {res.Books}</CardSubtitle>
+              <CardSubtitle><strong>Genre : </strong> {res.genre}</CardSubtitle>
               {/* <CardText>{res.AboutAuther}</CardText> */}
               <Button color="primary" href="/addbook">Edit</Button> {' '}
               <Button color="danger">Delete</Button>
