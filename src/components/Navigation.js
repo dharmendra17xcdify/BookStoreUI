@@ -8,9 +8,9 @@ const Navigation = () => {
     return <Navbar color="light" light expand="md">
         <NavbarBrand href="/">The Book Store</NavbarBrand>
         <Nav>
-            <NavItem>
+            {/* <NavItem>
                 <NavLink href="/about">About</NavLink>
-            </NavItem>
+            </NavItem> */}
             <NavItem>
                 <NavLink href="/books">Books</NavLink>
             </NavItem>
