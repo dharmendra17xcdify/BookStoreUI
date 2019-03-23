@@ -5,9 +5,7 @@
 .container-fluid {
     width: 80% !important;
 }
-.card {
-    width: 20% !important;
-}
+
 .card-img {
     width: 50% !important;
     border-radius: calc(.25rem - 1px);

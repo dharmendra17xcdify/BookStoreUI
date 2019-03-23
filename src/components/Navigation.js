@@ -9,6 +9,9 @@ const Navigation = () => {
         <NavbarBrand href="/">The Book Store</NavbarBrand>
         <Nav>
             <NavItem>
+                <NavLink href="/about">About</NavLink>
+            </NavItem>
+            <NavItem>
                 <NavLink href="/books">Books</NavLink>
             </NavItem>
             <NavItem>
@@ -18,13 +21,10 @@ const Navigation = () => {
                 <NavLink href="/inventory">Inventory</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink href="/about">About</NavLink>
+                <NavLink href="/addbook">New Book</NavLink>
             </NavItem>
             <NavItem>
-            <Button color="primary" href="/addbook">Add a Book</Button> 
-            </NavItem>
-            <NavItem>
-            <Button color="primary" href="/addauthor">Add an Author</Button>
+                <NavLink href="/addauthor">New Author</NavLink>
             </NavItem>
         </Nav>
     </Navbar>

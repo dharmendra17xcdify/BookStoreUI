@@ -7,8 +7,10 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
  import Agni from '../images/agni.jpg';
  import './Books.css';
  import * as routes from '../constants/routes';
+ import data from '../constants/data';
 
-const Books = (props) => {
+ class Books extends React.Component {
+  render(){
   return (
     <div>
     <Jumbotron fluid>
@@ -30,7 +32,7 @@ const Books = (props) => {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>This card has supporting text below as a natural lead-in to additional content.</CardText>
-          <Button color="primary">Edit</Button> {' '}
+          <Button color="primary" href="/addbook">Edit</Button> {' '}
           <Button color="danger">Delete</Button>
         </CardBody>
       </Card>
@@ -40,7 +42,7 @@ const Books = (props) => {
           <CardTitle>Card title</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</CardText>
-          <Button color="primary">Edit</Button> {' '}
+          <Button color="primary" href="/addbook">Edit</Button> {' '}
           <Button color="danger">Delete</Button>
         </CardBody>
       </Card>
@@ -50,6 +52,7 @@ const Books = (props) => {
   </div>
     
   );
+}
 };
 
 export default Books;
