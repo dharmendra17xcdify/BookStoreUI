@@ -3,6 +3,28 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'r
 import './BookForm.css';
 
 export default class AuthorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     data: []
+    }
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+  
+
+  componentDidMount() {
+   //this.setState({data: data});
+  }
+
+  componentWillMount() {
+
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+  }
+
   render() {
     return (
       <Form className="container">
@@ -26,8 +48,8 @@ export default class AuthorForm extends React.Component {
           <FormText>Example help text that remains unchanged.</FormText>
         </FormGroup>
         
-        <Button color="primary">Save</Button> {' '}
-          <Button color="info">Clear</Button>
+        <Button color="primary" type="submit" onClick={this.handleFormSubmit}>Save</Button> {' '}
+        <Button color="info">Clear</Button>
       </Form>
     );
   }

@@ -38,6 +38,23 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
 ];
 
  class Authors extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     data: []
+    }
+
+  }
+  
+
+  componentDidMount() {
+   //this.setState({data: data});
+  }
+
+  componentWillMount() {
+
+  }
+
   render(){
   return (
       <div>

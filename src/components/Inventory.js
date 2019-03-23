@@ -50,6 +50,23 @@ const invData = [
 ]
 
 export default class Inventory extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     data: []
+    }
+
+  }
+  
+
+  componentDidMount() {
+   //this.setState({data: data});
+  }
+
+  componentWillMount() {
+
+  }
+
   render() {
     return (
       <div className="container">

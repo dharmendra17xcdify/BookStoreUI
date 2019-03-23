@@ -3,6 +3,28 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'r
 import './BookForm.css';
 
 export default class InventoryForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     data: []
+    }
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+  
+
+  componentDidMount() {
+   //this.setState({data: data});
+  }
+
+  componentWillMount() {
+
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+  }
+
   render() {
     return (
       <Form className="container">
@@ -46,7 +68,7 @@ export default class InventoryForm extends React.Component {
           <Input type="number" placeholder="Sold Qty"/>
         </FormGroup>
         
-        <Button color="primary">Save</Button> {' '}
+        <Button color="primary" type="submit" onClick={this.handleFormSubmit}>Save</Button> {' '}
         <Button color="info">Clear</Button>
       </Form>
     );
