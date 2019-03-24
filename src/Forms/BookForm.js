@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Alert } from 'reactstrap';
 import './BookForm.css';
 import FormValidator from './FormValidator';
 import _ from 'lodash';
@@ -72,11 +72,17 @@ export default class BookForm extends React.Component {
       ...INITIAL_STATE,
       errorMessage: '',
       validation: this.validator.valid(),
-     bookData: []
+     bookData: [],
+     visible: true
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.submitted = false;
+    this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onDismiss() {
+    this.setState({ visible: false });
   }
 
   handleInputChange = event => {
@@ -116,8 +122,12 @@ export default class BookForm extends React.Component {
   render() {
 
     if (this.submitted === true) {
-      return (
-      <Redirect to="/books"/>
+      return ( <div>
+        <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>
+          Book saved successfully.
+        </Alert>
+        <Redirect to="/books"/>
+      </div>
       )
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router'
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Alert  } from 'reactstrap';
 import './BookForm.css';
 import FormValidator from './FormValidator';
 import _ from 'lodash';
@@ -44,12 +44,18 @@ export default class AuthorForm extends React.Component {
       ...INITIAL_STATE,
       errorMessage: '',
       validation: this.validator.valid(),
-     authorData: []
+     authorData: [],
+     visible: true
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.submitted = false;
+    this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onDismiss() {
+    this.setState({ visible: false });
   }
   
   handleInputChange = event => {
@@ -88,8 +94,12 @@ export default class AuthorForm extends React.Component {
   render() {
 
     if (this.submitted === true) {
-      return (
-      <Redirect to="/authors"/>
+      return ( <div>
+        <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>
+          Auther saved successfully.
+        </Alert>
+        <Redirect to="/authors"/>
+      </div>
       )
     }
 
@@ -98,46 +108,52 @@ export default class AuthorForm extends React.Component {
                       this.state.validation                   // otherwise just use what's in state
 
     return ( <div>
-        <Form className="container">
+        <Form className="container was-validated">
         <h2>Fill Author Information</h2>
           <FormGroup>
           <div className={validation.authorName.isInvalid ? 'has-error' : ''}>
             <Label for="authorName"><b>Author Name</b></Label>
-            <Input 
+            <Input required
               maxLength={80} 
               name="authorName" 
               id="authorName" 
               placeholder="Enter Author Name"
               onChange={event => this.setState(byPropKey('authorName', event.target.value), this.handleInputChange(event))}
             />
-            <FormText>*Required</FormText>
-            <span className="help-block">{validation.authorName.message}</span>
+            <div className="valid-feedback">Valid.</div>
+            <div className="invalid-feedback">Please fill out this field.</div>
+            {/* <FormText>*Required</FormText>
+            <span className="help-block">{validation.authorName.message}</span> */}
           </div>
           </FormGroup>
           <FormGroup >
           <div className={validation.genre.isInvalid ? 'has-error' : ''}>
             <Label for="genre"><b>Genre</b></Label>
-            <Input 
+            <Input required
             maxLength={80} 
             name="genre" 
             id="genre" 
-            placeholder="Enter genre"
+            placeholder="Enter Genre"
             onChange={event => this.setState(byPropKey('genre', event.target.value), this.handleInputChange(event))}/>
-            <FormText>*Required</FormText>
-            <span className="help-block">{validation.genre.message}</span>
+            {/* <FormText>*Required</FormText>
+            <span className="help-block">{validation.genre.message}</span> */}
+            <div className="valid-feedback">Valid.</div>
+            <div className="invalid-feedback">Please fill out this field.</div>
           </div>
           </FormGroup>
           <FormGroup>
           <div className={validation.aboutAuthor.isInvalid ? 'has-error' : ''}>
             <Label for="aboutAuthor"><b>About Auther</b></Label>
-            <Input 
+            <Input required
             maxLength={255} 
             name="aboutAuthor" 
             id="aboutAuthor" 
             placeholder="Enter About Auther"
             onChange={event => this.setState(byPropKey('aboutAuthor', event.target.value), this.handleInputChange(event))}/>
-            <FormText>*Required</FormText>
-            <span className="help-block">{validation.aboutAuthor.message}</span>
+            {/* <FormText>*Required</FormText>
+            <span className="help-block">{validation.aboutAuthor.message}</span> */}
+            <div className="valid-feedback">Valid.</div>
+            <div className="invalid-feedback">Please fill out this field.</div>
           </div>
           </FormGroup>
           

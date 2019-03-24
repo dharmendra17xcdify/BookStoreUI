@@ -60,7 +60,12 @@ export default class Inventory extends React.Component {
   
 
   componentDidMount() {
-   //this.setState({data: data});
+    fetch('http://localhost:9000/api/inventory')
+    .then( result => {
+      return result.json();
+    }).then( data => {
+      this.setState({data: data});
+    })
   }
 
   componentWillMount() {

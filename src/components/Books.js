@@ -85,7 +85,12 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
    }
 
    componentDidMount() {
-    this.setState({data: data});
+    fetch('http://localhost:9000/api/books')
+    .then( result => {
+      return result.json();
+    }).then( data => {
+      this.setState({data: data});
+    })
    }
 
    componentWillMount() {
