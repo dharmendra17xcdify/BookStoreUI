@@ -4,8 +4,10 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Alert } 
 import './BookForm.css';
 import FormValidator from './FormValidator';
 import _ from 'lodash';
+import axios from 'axios';
 
 const INITIAL_STATE = {
+  bookId: null,
   bookName: '',
   authorName: '',
   datePublished: '',
@@ -13,6 +15,7 @@ const INITIAL_STATE = {
   publisher: '',
   about: '',
   genre: '',
+  authorId: null
 };
 
 const byPropKey = (propertyName, value) => () => ({
@@ -106,6 +109,7 @@ export default class BookForm extends React.Component {
     event.preventDefault();
     const validation = this.validator.validate(this.state);
     this.setState({ validation, ...INITIAL_STATE });
+    console.log(this.state);
 
     let bookExist = _.find(this.state.bookData, {bookName: this.state.bookName})
     
@@ -116,6 +120,51 @@ export default class BookForm extends React.Component {
     } else if (validation.isValid) {
       this.submitted = true;
       console.log("Book saved with name: ", this.state.bookName);
+
+      if(this.state.bookId === null) {
+        axios({
+          method: 'post',
+          url: 'http://localhost:9000/api/books',
+          data: {
+            BookName: this.state.bookName,
+            AuthorName: this.state.aboutAuthor,
+            AuthorId: this.state.authorId,
+            DatePublished: this.state.datePublished,
+            Publication: this.state.publication,
+            Publisher: this.state.publisher,
+            About: this.state.about
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        axios({
+          method: 'put',
+          url: 'http://localhost:9000/api/books',
+          data: {
+            BookName: this.state.bookName,
+            AuthorName: this.state.aboutAuthor,
+            AuthorId: this.state.authorId,
+            DatePublished: this.state.datePublished,
+            Publication: this.state.publication,
+            Publisher: this.state.publisher,
+            About: this.state.about
+          },
+          params: {
+            bookId: this.state.bookId
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     } 
   }
 

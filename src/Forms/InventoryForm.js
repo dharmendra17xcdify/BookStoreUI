@@ -4,10 +4,14 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Alert  }
 import './BookForm.css';
 import FormValidator from './FormValidator';
 import _ from 'lodash';
+import axios from 'axios';
 
 const INITIAL_STATE = {
+  inventoryId: null,
+  bookId: null,
   bookName: '',
   authorName: '',
+  authorId: null,
   qtyAvail: '',
   qtySold: '',
   qtyOnOrder: '',
@@ -99,6 +103,7 @@ export default class InventoryForm extends React.Component {
     event.preventDefault();
     const validation = this.validator.validate(this.state);
     this.setState({ validation, ...INITIAL_STATE });
+    console.log(this.state);
 
     let bookExist = _.find(this.state.inventoryData, {bookName: this.state.bookName})
     
@@ -109,6 +114,53 @@ export default class InventoryForm extends React.Component {
     } else if (validation.isValid) {
       this.submitted = true;
       console.log("Inventory saved with name: ", this.state.bookName);
+
+      if(this.state.inventoryId === null) {
+        axios({
+          method: 'post',
+          url: 'http://localhost:9000/api/inventory',
+          data: {
+            BookId: this.state.bookId,
+            BookName: this.state.bookName,
+            AuthorName: this.state.authorName,
+            AuthorId: this.state.authorId,
+            BookQuantityAvail: this.state.qtyAvail,
+            BookQuantitySold: this.state.qtySold,
+            BookQuantityOnOrder: this.state.qtyOnOrder,
+            BookQuantityTotal: this.state.total
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        axios({
+          method: 'put',
+          url: 'http://localhost:9000/api/inventory',
+          data: {
+            BookId: this.state.bookId,
+            BookName: this.state.bookName,
+            AuthorName: this.state.authorName,
+            AuthorId: this.state.authorId,
+            BookQuantityAvail: this.state.qtyAvail,
+            BookQuantitySold: this.state.qtySold,
+            BookQuantityOnOrder: this.state.qtyOnOrder,
+            BookQuantityTotal: this.state.total
+          },
+          params: {
+            inventoryId: this.state.inventoryId
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     } 
   }
 

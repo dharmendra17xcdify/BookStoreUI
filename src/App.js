@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import icons from 'glyphicons'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -32,6 +33,7 @@ class App extends Component {
         <Route exact path={routes.ADD_AUTHOR} component={AuthorForm} />
         <Route exact path={routes.ADD_INVENTORY} component={InventoryForm} />
       </Switch>
+      <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
       <footer className="container-fluid footer text-center">
         <p>Developed By  <a href="http://www.Xcdify.com/">www.Xcdify.com</a></p> 
       </footer>
@@ -40,5 +42,34 @@ class App extends Component {
     );
   }
 }
+
+class ScrollButton extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+        intervalId: 0
+    };
+  }
+  
+  scrollStep() {
+    if (window.pageYOffset === 0) {
+        clearInterval(this.state.intervalId);
+    }
+    window.scroll(0, window.pageYOffset - this.props.scrollStepInPx);
+  }
+  
+  scrollToTop() {
+    let intervalId = setInterval(this.scrollStep.bind(this), this.props.delayInMs);
+    this.setState({ intervalId: intervalId });
+  }
+  
+  render () {
+      return <button title='Back to top' className='scroll' 
+               onClick={ () => { this.scrollToTop(); }}><b>Top</b>
+                {/* <span className='arrow-up glyphicon glyphicon-chevron-up'></span> */}
+              </button>;
+   }
+} 
 
 export default App;

@@ -4,8 +4,10 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Alert  }
 import './BookForm.css';
 import FormValidator from './FormValidator';
 import _ from 'lodash';
+import axios from 'axios';
 
 const INITIAL_STATE = {
+  authorId: null,
   authorName: '',
   aboutAuthor: '',
   genre: '',
@@ -78,6 +80,7 @@ export default class AuthorForm extends React.Component {
     event.preventDefault();
     const validation = this.validator.validate(this.state);
     this.setState({ validation, ...INITIAL_STATE });
+    console.log(this.state);
 
     let authorExist = _.find(this.state.authorData, {authorName: this.state.authorName})
     
@@ -88,6 +91,43 @@ export default class AuthorForm extends React.Component {
     } else if (validation.isValid) {
       this.submitted = true;
       console.log("Author saved with name: ", this.state.authorName);
+
+      if(this.state.authorId === null) {
+        axios({
+          method: 'post',
+          url: 'http://localhost:9000/api/authors',
+          data: {
+            AuthorName: this.state.authorName,
+            Genre: this.state.genre,
+            AboutAuther: this.state.aboutAuthor
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        axios({
+          method: 'put',
+          url: 'http://localhost:9000/api/authors',
+          data: {
+            AuthorName: this.state.authorName,
+            Genre: this.state.genre,
+            AboutAuther: this.state.aboutAuthor
+          },
+          params: {
+            authorId: this.state.authorId
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     } 
   }
 
