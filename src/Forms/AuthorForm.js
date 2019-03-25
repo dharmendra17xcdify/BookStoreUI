@@ -11,6 +11,8 @@ const INITIAL_STATE = {
   authorName: '',
   aboutAuthor: '',
   genre: '',
+  books: '',
+  awards: ''
 };
 
 const byPropKey = (propertyName, value) => () => ({
@@ -39,6 +41,18 @@ export default class AuthorForm extends React.Component {
         method: 'isEmpty', 
         validWhen: false, 
         message: 'Genre is required.'
+      },
+      { 
+        field: 'awards', 
+        method: 'isEmpty', 
+        validWhen: false, 
+        message: 'Awards is required.'
+      },
+      { 
+        field: 'books', 
+        method: 'isEmpty', 
+        validWhen: false, 
+        message: 'Books is required.'
       }
     ]);
 
@@ -175,6 +189,36 @@ export default class AuthorForm extends React.Component {
             id="genre" 
             placeholder="Enter Genre"
             onChange={event => this.setState(byPropKey('genre', event.target.value), this.handleInputChange(event))}/>
+            {/* <FormText>*Required</FormText>
+            <span className="help-block">{validation.genre.message}</span> */}
+            <div className="valid-feedback">Valid.</div>
+            <div className="invalid-feedback">Please fill out this field.</div>
+          </div>
+          </FormGroup>
+          <FormGroup >
+          <div className={validation.awards.isInvalid ? 'has-error' : ''}>
+            <Label for="awards"><b>Awards</b></Label>
+            <Input required
+            maxLength={80} 
+            name="awards" 
+            id="awards" 
+            placeholder="Enter Awards"
+            onChange={event => this.setState(byPropKey('awards', event.target.value), this.handleInputChange(event))}/>
+            {/* <FormText>*Required</FormText>
+            <span className="help-block">{validation.genre.message}</span> */}
+            <div className="valid-feedback">Valid.</div>
+            <div className="invalid-feedback">Please fill out this field.</div>
+          </div>
+          </FormGroup>
+          <FormGroup >
+          <div className={validation.books.isInvalid ? 'has-error' : ''}>
+            <Label for="books"><b>Books</b></Label>
+            <Input required
+            maxLength={80} 
+            name="books" 
+            id="books" 
+            placeholder="Enter Books"
+            onChange={event => this.setState(byPropKey('books', event.target.value), this.handleInputChange(event))}/>
             {/* <FormText>*Required</FormText>
             <span className="help-block">{validation.genre.message}</span> */}
             <div className="valid-feedback">Valid.</div>

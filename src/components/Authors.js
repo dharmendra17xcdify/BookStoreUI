@@ -75,13 +75,13 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
         <Container fluid>
         <CardDeck>
       {
-        _.map(authorData, (res, i) => {
+        _.map(this.state.data, (res, i) => {
           return <Card key={'book-' + i}>
-            <CardImg src={res.image} alt="Card image cap" />
+            <CardImg src={ArundhatiRoy} alt="Card image cap" />
             <CardBody>
-              <CardTitle><strong>Name : </strong>{res.AuthorName}</CardTitle>
-              <CardSubtitle><strong>Awards : </strong> {res.Awards}</CardSubtitle>
-              <CardSubtitle><strong>Books : </strong> {res.Books}</CardSubtitle>
+              <CardTitle><strong>Name : </strong>{res.authorName}</CardTitle>
+              <CardSubtitle><strong>Awards : </strong> {res.awards}</CardSubtitle>
+              <CardSubtitle><strong>Books : </strong> {res.books}</CardSubtitle>
               <CardSubtitle><strong>Genre : </strong> {res.genre}</CardSubtitle>
               {/* <CardText>{res.AboutAuther}</CardText> */}
               <Button color="primary" href="/addbook">Edit</Button> {' '}
