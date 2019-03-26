@@ -80,7 +80,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
    constructor(props) {
      super(props);
      this.state = {
-      data: []
+      bookData: []
      }
    }
 
@@ -89,7 +89,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
     .then( result => {
       return result.json();
     }).then( data => {
-      this.setState({data: data});
+      this.setState({bookData: data});
     })
    }
 
@@ -104,11 +104,11 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
             <Container fluid>
             <CardDeck>
           {
-           _.map(books, (res, i) => {
+           _.map(this.state.bookData, (res, i) => {
              return <Card key={'book-' + i}>
-              <CardImg className="book-image" src={res.image} alt="Card image cap" />
+              <CardImg className="book-image" src={mahabharat} alt="Card image cap" />
               <CardBody>
-                <CardTitle><strong>Title : </strong>  {res.name}</CardTitle>
+                <CardTitle><strong>Title : </strong>  {res.bookName}</CardTitle>
                 <CardSubtitle><strong>Author : </strong> {res.authorName}</CardSubtitle>
                 <CardSubtitle><strong>Genre : </strong> {res.genre}</CardSubtitle>
                 {/* <CardText>{res.about}</CardText> */}

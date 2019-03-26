@@ -76,7 +76,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
         <CardDeck>
       {
         _.map(this.state.data, (res, i) => {
-          return <Card key={'book-' + i}>
+          return <Card key={'author-' + i}>
             <CardImg src={ArundhatiRoy} alt="Card image cap" />
             <CardBody>
               <CardTitle><strong>Name : </strong>{res.authorName}</CardTitle>

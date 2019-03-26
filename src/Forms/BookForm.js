@@ -76,6 +76,7 @@ export default class BookForm extends React.Component {
       errorMessage: '',
       validation: this.validator.valid(),
      bookData: [],
+     authorData: [],
      visible: true
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -98,7 +99,12 @@ export default class BookForm extends React.Component {
   
 
   componentDidMount() {
-   //this.setState({data: data});
+    fetch('http://localhost:9000/api/authors')
+    .then( result => {
+      return result.json();
+    }).then( data => {
+      this.setState({authorData: data});
+    })
   }
 
   componentWillMount() {
@@ -132,7 +138,8 @@ export default class BookForm extends React.Component {
             DatePublished: this.state.datePublished,
             Publication: this.state.publication,
             Publisher: this.state.publisher,
-            About: this.state.about
+            About: this.state.about,
+            Genre: this.state.genre
           }
         })
         .then(function (response) {
@@ -152,7 +159,8 @@ export default class BookForm extends React.Component {
             DatePublished: this.state.datePublished,
             Publication: this.state.publication,
             Publisher: this.state.publisher,
-            About: this.state.about
+            About: this.state.about,
+            Genre: this.state.genre
           },
           params: {
             bookId: this.state.bookId
@@ -278,7 +286,8 @@ export default class BookForm extends React.Component {
             maxLength = {80}
             name="genre"
             id="genre"
-            placeholder="Enter genre"/>
+            placeholder="Enter genre"
+            onChange={event => this.setState(byPropKey('genre', event.target.value), this.handleInputChange(event))}/>
           <FormText>*Required</FormText>
           <span className="help-block">{validation.genre.message}</span>
         </div>

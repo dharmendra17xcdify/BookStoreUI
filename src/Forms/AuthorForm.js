@@ -147,6 +147,8 @@ export default class AuthorForm extends React.Component {
 
   render() {
 
+    let auther = this.props; 
+    
     if (this.submitted === true) {
       return ( <div>
         <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss}>
