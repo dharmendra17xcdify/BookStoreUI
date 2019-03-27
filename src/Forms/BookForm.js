@@ -77,6 +77,8 @@ export default class BookForm extends React.Component {
       validation: this.validator.valid(),
      bookData: [],
      authorData: [],
+     selectedAuthor: '',
+     authorId: null,
      visible: true
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -95,6 +97,12 @@ export default class BookForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+
+    if(event.target.name === 'authorName') {
+      this.setState({
+        selectedAuthor: event.target.value
+      })
+    }
   }
   
 
@@ -117,8 +125,9 @@ export default class BookForm extends React.Component {
     this.setState({ validation, ...INITIAL_STATE });
     console.log(this.state);
 
-    let bookExist = _.find(this.state.bookData, {bookName: this.state.bookName})
-    
+    let bookExist = _.find(this.state.bookData, {bookName: this.state.bookName});
+    let author = _.find(this.state.authorData, {authorName: this.state.selectedAuthor});
+
     if(bookExist){
       this.setState({
         errorMessage: 'This Book already exists!.'
@@ -133,8 +142,8 @@ export default class BookForm extends React.Component {
           url: 'http://localhost:9000/api/books',
           data: {
             BookName: this.state.bookName,
-            AuthorName: this.state.aboutAuthor,
-            AuthorId: this.state.authorId,
+            AuthorName: this.state.authorName,
+            AuthorId: author.authorId,
             DatePublished: this.state.datePublished,
             Publication: this.state.publication,
             Publisher: this.state.publisher,
@@ -212,17 +221,17 @@ export default class BookForm extends React.Component {
         <FormGroup>
         <div className={validation.authorName.isInvalid ? 'has-error' : ''}>
           <Label for="authorName"><b>Author Name</b></Label>
-          <Input 
+          <Input value={this.state.selectedAuthor}
           type="select" 
           name="authorName" 
           id="authorName"
           onChange={event => this.setState(byPropKey('authorName', event.target.value), this.handleInputChange(event))}>
-          <option>Select</option>
-            <option>Author1</option>
-            <option>Author2</option>
-            <option>Author3</option>
-            <option>Author4</option>
-            <option>Author5</option>
+          {
+            _.map(this.state.authorData, (author, i) => {
+              return <option key={'author-' + i}  key={author.authorId} value={author.authorName}>{author.authorName}</option>
+            })
+          }
+          
           </Input>
           <FormText>*Required</FormText>
           <span className="help-block">{validation.authorName.message}</span>

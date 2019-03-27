@@ -70,6 +70,10 @@ export default class InventoryForm extends React.Component {
       errorMessage: '',
       validation: this.validator.valid(),
       inventoryData: [],
+      authorData: [],
+      bookData: [],
+      selectedBook: '',
+      selectedAuthor: '',
       visible: true
     }
 
@@ -89,10 +93,32 @@ export default class InventoryForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+
+    if(event.target.name === 'authorName') {
+      this.setState({
+        selectedAuthor: event.target.value
+      })
+    } else if(event.target.name === 'bookName') {
+      this.setState({
+        selectedBook: event.target.value
+      })
+    }
   }
 
   componentDidMount() {
-   //this.setState({data: data});
+    fetch('http://localhost:9000/api/authors')
+    .then( result => {
+      return result.json();
+    }).then( data => {
+      this.setState({authorData: data});
+    })
+
+    fetch('http://localhost:9000/api/books')
+    .then( result => {
+      return result.json();
+    }).then( data => {
+      this.setState({bookData: data});
+    })
   }
 
   componentWillMount() {
@@ -106,6 +132,10 @@ export default class InventoryForm extends React.Component {
     console.log(this.state);
 
     let bookExist = _.find(this.state.inventoryData, {bookName: this.state.bookName})
+
+    let author = _.find(this.state.authorData, {authorName: this.state.selectedAuthor});
+
+    let book = _.find(this.state.bookData, {bookName: this.state.selectedBook});
     
     if(bookExist){
       this.setState({
@@ -120,10 +150,10 @@ export default class InventoryForm extends React.Component {
           method: 'post',
           url: 'http://localhost:9000/api/inventory',
           data: {
-            BookId: this.state.bookId,
+            BookId: book.bookId,
             BookName: this.state.bookName,
             AuthorName: this.state.authorName,
-            AuthorId: this.state.authorId,
+            AuthorId: author.authorId,
             BookQuantityAvail: this.state.qtyAvail,
             BookQuantitySold: this.state.qtySold,
             BookQuantityOnOrder: this.state.qtyOnOrder,
@@ -188,14 +218,16 @@ export default class InventoryForm extends React.Component {
         <FormGroup>
         <div className={validation.bookName.isInvalid ? 'has-error' : ''}>
           <Label for="bookName"><b>Book Name</b></Label>
-          <Input type="select" name="bookName" id="bookName" 
+          <Input value={this.state.selectedBook}
+          type="select" 
+          name="bookName" 
+          id="bookName"
           onChange={event => this.setState(byPropKey('bookName', event.target.value), this.handleInputChange(event))}>
-          <option>Select</option>
-            <option>Book1</option>
-            <option>Book2</option>
-            <option>Book3</option>
-            <option>Book4</option>
-            <option>Book5</option>
+          {
+            _.map(this.state.bookData, (book, i) => {
+              return <option key={'book-' + i}  key={book.bookId} value={book.bookName}>{book.bookName}</option>
+            })
+          }
           </Input>
           <FormText>*Required</FormText>
           <span className="help-block">{validation.bookName.message}</span>
@@ -204,14 +236,16 @@ export default class InventoryForm extends React.Component {
         <FormGroup>
         <div className={validation.authorName.isInvalid ? 'has-error' : ''}>
           <Label for="authorName"><b>Author Name</b></Label>
-          <Input type="select" name="authorName" id="authorName"
+          <Input value={this.state.selectedAuthor}
+          type="select" 
+          name="authorName" 
+          id="authorName"
           onChange={event => this.setState(byPropKey('authorName', event.target.value), this.handleInputChange(event))}>
-          <option>Select</option>
-            <option>Author1</option>
-            <option>Author2</option>
-            <option>Author3</option>
-            <option>Author4</option>
-            <option>Author5</option>
+          {
+            _.map(this.state.authorData, (author, i) => {
+              return <option key={'author-' + i}  key={author.authorId} value={author.authorName}>{author.authorName}</option>
+            })
+          }
           </Input>
           <FormText>*Required</FormText>
           <span className="help-block">{validation.authorName.message}</span>

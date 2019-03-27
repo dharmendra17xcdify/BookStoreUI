@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 import _ from 'lodash';
 
-const invData = [
+const inventoryData = [
   {
     InventoryId: 1,
     BookId: 1,
@@ -53,7 +53,7 @@ export default class Inventory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     data: []
+     invData: []
     }
 
   }
@@ -64,7 +64,7 @@ export default class Inventory extends React.Component {
     .then( result => {
       return result.json();
     }).then( data => {
-      this.setState({data: data});
+      this.setState({invData: data});
     })
   }
 
@@ -89,16 +89,16 @@ export default class Inventory extends React.Component {
           </tr>
         </thead>
         {
-          _.map(invData, (res, i) => {
-            return <tbody key={'book-' + i}>
+          _.map(this.state.invData, (res, i) => {
+            return <tbody key={'inv-' + i}>
                 <tr>
-                <th scope="row">{res.InventoryId}</th>
-                <td>{res.BookName}</td>
-                <td>{res.AutherName}</td>
-                <td>{res.BookQuantityAvail}</td>
-                <td>{res.BookQuantitySold}</td>
-                <td>{res.BookQuantityOnOrder}</td>
-                <td>{res.BookQuantityTotal}</td>
+                <th scope="row">{i+1}</th>
+                <td>{res.bookName}</td>
+                <td>{res.autherName}</td>
+                <td>{res.bookQuantityAvail}</td>
+                <td>{res.bookQuantitySold}</td>
+                <td>{res.bookQuantityOnOrder}</td>
+                <td>{res.bookQuantityTotal}</td>
                 <td><Button color="primary" href="/add-inventory">Edit</Button> {' '}
                 <Button color="danger">Delete</Button></td>
               </tr>

@@ -1,16 +1,13 @@
 import React from 'react';
 import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
  CardSubtitle, CardBody, Jumbotron, Container } from 'reactstrap';
- import { Link, withRouter, } from 'react-router-dom';
- import Isolt from '../images/isolt.jpg';
+ //import Isolt from '../images/isolt.jpg';
  import TheGod from '../images/thegod.jpg';
- import Agni from '../images/agni.jpg';
+ //import Agni from '../images/agni.jpg';
  import mahabharat from '../images/mahabharat.jpg';
  import gita from '../images/gita.jpg';
  import States from '../images/2_States.jpg';
  import './Books.css';
- import * as routes from '../constants/routes';
- import data from '../constants/data';
  import _ from 'lodash';
 
  const books = [
