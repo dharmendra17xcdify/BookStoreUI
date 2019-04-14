@@ -15,6 +15,7 @@ import * as routes from './constants/routes';
 import BookForm from './Forms/BookForm';
 import AuthorForm from './Forms/AuthorForm';
 import InventoryForm from './Forms/InventoryForm';
+import PageNotFound from './components/PageNotFound';
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
         <Route exact path={routes.ADD_BOOK} component={BookForm} />
         <Route exact path={routes.ADD_AUTHOR} component={AuthorForm} />
         <Route exact path={routes.ADD_INVENTORY} component={InventoryForm} />
+        <Route component={PageNotFound} />
       </Switch>
       <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
       <footer className="container-fluid footer text-center">
