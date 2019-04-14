@@ -5,6 +5,9 @@ import './BookForm.css';
 import FormValidator from './FormValidator';
 import _ from 'lodash';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as authorActions from '../redux/actions/authorActions';
 
 const INITIAL_STATE = {
   authorId: null,
@@ -19,7 +22,7 @@ const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
 });
 
-export default class AuthorForm extends React.Component {
+class AuthorForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -95,6 +98,8 @@ export default class AuthorForm extends React.Component {
     const validation = this.validator.validate(this.state);
     this.setState({ validation, ...INITIAL_STATE });
     console.log(this.state);
+
+    this.props.dispatch(authorActions.createAuthor(this.state.INITIAL_STATE))
 
     let authorExist = _.find(this.state.authorData, {authorName: this.state.authorName})
     
@@ -250,3 +255,14 @@ export default class AuthorForm extends React.Component {
     );
   }
 }
+
+// AuthorForm.PropTypes = {
+//   dispatch: PropTypes.func.isRequired
+// };
+
+function mapSateToProps(state) {
+  return {
+    authorData: state.INITIAL_STATE
+  }
+}
+export default connect(mapSateToProps) (AuthorForm);

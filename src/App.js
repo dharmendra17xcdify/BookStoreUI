@@ -16,6 +16,7 @@ import BookForm from './Forms/BookForm';
 import AuthorForm from './Forms/AuthorForm';
 import InventoryForm from './Forms/InventoryForm';
 import PageNotFound from './components/PageNotFound';
+import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
